@@ -29,6 +29,34 @@ I also implemented the `entire pipeline`, including:
 
 ---
 
+## Core Workflow (Pseudo code)
+
+```python
+for each trading_day:
+    # Step 1. Data preparation
+    update fund NAVs and compute daily log returns
+    
+    # Step 2. Rolling model training
+    train XGBoost regressor on past N-day window
+    predict next-day returns (μ̂)
+
+    # Step 3. Risk factor calculation
+    compute volatility, CVaR, max drawdown, and market β
+
+    # Step 4. Portfolio construction
+    combine predicted μ̂ with risk metrics
+    generate weights for multiple strategies:
+        - Risk Parity (static)
+        - Alpha-Beta + CVaR (semi-dynamic)
+        - Ridge multi-factor (dynamic)
+
+    # Step 5. Backtesting
+    simulate T+1 execution, turnover cost, and NAV evolution
+    record Sharpe ratio, drawdown, annualized return
+```
+
+---
+
 ## Module Justification
 
 ### `data_handle.py`
@@ -70,6 +98,16 @@ I also implemented the `entire pipeline`, including:
     ![Strategy_Performance](images/Strategy_Performance.png)
 - Performance Metrics Example
     ![Performance_Metrics_Example](images/performance_metrics_all.png)
+
+---
+
+## Future Work
+
+1. **Configuration Management** – externalize hyperparameters to YAML/JSON files for faster experimentation.  
+2. **Logging & Monitoring** – integrate TensorBoard-style dashboards for real-time training and backtesting tracking.  
+3. **Model Explainability** – add feature-importance analysis and visualize LSTM attention weights for interpretability.  
+4. **Risk Analytics** – expand performance evaluation with Sharpe, Sortino, CVaR, and max drawdown metrics.  
+5. **Parallelization & Tuning** – enable multi-environment parallel data collection and automated hyperparameter search (e.g., Optuna).  
 
 ---
 
