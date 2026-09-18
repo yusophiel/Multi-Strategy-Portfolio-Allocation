@@ -1,0 +1,22 @@
+[project]
+name = "yingling-systematic-investment-research"
+version = "0.1.0"
+description = "Regime-aware multi-strategy research, allocation, and risk overlay pipeline."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.23",
+  "pandas>=1.5",
+  "openpyxl>=3.1",
+  "xlrd>=2.0"
+]
+
+[project.scripts]
+yingling-research = "src.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src"]

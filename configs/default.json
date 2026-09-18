@@ -1,0 +1,97 @@
+{
+  "data": {
+    "returns_csv": null,
+    "macro_csv": null,
+    "date_column": "date",
+    "seed": 42,
+    "start": "2010-01-31",
+    "end": "2025-12-31",
+    "frequency": "M"
+  },
+  "universe": {
+    "sleeves": [
+      "equity_beta",
+      "trend_following",
+      "value_quality",
+      "carry_macro",
+      "defensive_low_vol",
+      "cash"
+    ],
+    "cash_sleeve": "cash",
+    "strategic_weights": {
+      "equity_beta": 0.25,
+      "trend_following": 0.20,
+      "value_quality": 0.20,
+      "carry_macro": 0.15,
+      "defensive_low_vol": 0.15,
+      "cash": 0.05
+    }
+  },
+  "experiment": {
+    "periods_per_year": 12,
+    "train_window": 84,
+    "validation_window": 24,
+    "walk_forward_mode": "rolling",
+    "rebalance_every": 1,
+    "execution_lag_periods": 1,
+    "min_training_rows": 180,
+    "enabled": [
+      "equal_weight",
+      "static_allocation",
+      "inverse_volatility",
+      "forecast_allocation",
+      "forecast_shrinkage",
+      "static_risk_limit",
+      "full_workflow",
+      "no_regime_features",
+      "no_costs"
+    ]
+  },
+  "features": {
+    "windows": [3, 6, 12],
+    "risk_window": 12,
+    "covariance_window": 36,
+    "regime_min_periods": 36
+  },
+  "forecasting": {
+    "models": [
+      "historical_mean",
+      "momentum_rule",
+      "reversal_rule",
+      "linear_regression",
+      "ridge_regression",
+      "sparse_linear",
+      "regime_conditional_mean",
+      "tree_stump"
+    ],
+    "ridge_alpha": 8.0,
+    "sparse_alpha": 0.015,
+    "momentum_window": 6,
+    "reversal_window": 3
+  },
+  "allocation": {
+    "max_weight": 0.45,
+    "min_weight": 0.0,
+    "risk_aversion": 4.0,
+    "signal_temperature": 0.65,
+    "neutral_blend": 0.25,
+    "uncertainty_floor": 0.01,
+    "confidence_scale": 1.5,
+    "transaction_cost_bps": 8.0
+  },
+  "risk_overlay": {
+    "policy": "dynamic",
+    "vol_quantile": 0.75,
+    "corr_quantile": 0.75,
+    "drawdown_limit": -0.08,
+    "static_reduction": 0.35,
+    "dynamic_max_reduction": 0.65,
+    "max_hedge_ratio": 0.35,
+    "hedge_cost_bps": 4.0,
+    "risk_on_threshold": 0.25
+  },
+  "report": {
+    "title": "Yingling Systematic Investment Research",
+    "base_currency": "USD"
+  }
+}
